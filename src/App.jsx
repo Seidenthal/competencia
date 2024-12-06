@@ -4,6 +4,7 @@ function App() {
       <div>
         <h1 className="text-red-500">Texto</h1>
         <h2>Teste</h2>
+        <h2>Teste</h2>
       </div>
     </>
   );
