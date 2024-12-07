@@ -10,7 +10,7 @@ const Section = ({ title, content }) => {
   };
 
   return (
-    <div className="flex flex-col bg-purple-500 rounded-md p-2 text-white">
+    <div className="flex flex-col bg-customPurple rounded-md p-2 text-white ">
       <div className="flex flex-row justify-between w-1/2">
         <button
           className=""
