@@ -34,10 +34,10 @@ const LoginAdmin = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen bg-customPurple">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
-          Login do Admin
+          Administração
         </h2>
         {error && (
           <div className="mb-4 p-2 bg-red-100 text-red-700 text-center rounded">
@@ -105,7 +105,7 @@ const LoginAdmin = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-customOrange transition duration-300"
           >
             Login
           </button>

@@ -116,11 +116,11 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto bg-white shadow-md rounded">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">Cadastros</h2>
-      <div className="flex space-x-4 mb-6">
+    <div className="p-6 max-w-4xl mx-auto bg-gray-200 shadow-md rounded">
+      <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">Cadastros</h2>
+      <div className="flex space-x-4 mb-6 justify-center">
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="bg-blue-500  font-bold text-white px-4 py-2 rounded hover:bg-customOrange" 
           onClick={() =>
             fetchData('tutoras', 'Tutoras', (item) => item.aprovado)
           }
@@ -128,13 +128,13 @@ const AdminDashboard = () => {
           Tutoras
         </button>
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="bg-blue-500 font-bold text-white px-4 py-2 rounded hover:bg-customOrange"
           onClick={() => fetchData('alunas', 'Alunas', (item) => item.aprovado)}
         >
           Alunas
         </button>
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="bg-blue-500 font-bold text-white px-4 py-2 rounded hover:bg-customOrange"
           onClick={loadAprovacoes}
         >
           Ver Aprovações
