@@ -8,6 +8,8 @@ import AdminDashboard from './AdminDashboard.jsx';
 import LoginAdmin from './LoginAdm.jsx';
 import LoginTutora from './LoginTutora.jsx';
 import LoginAluna from './LoginAluna.jsx';
+import RegisterAluna from './RegisterAluna.jsx'
+import RegisterTutora from './RegisterTutora.jsx'
 
 const router = createBrowserRouter([
   {
