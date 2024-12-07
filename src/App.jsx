@@ -17,7 +17,7 @@ const App = () => {
     <Link to="/sobre" className="text-lg text-white no-underline p-2 hover:bg-customOrange transition duration-300">Sobre Nós</Link>
   </li>
   <li className="ml-5">
-    <Link to="/loginAdm" className="text-lg text-white no-underline p-2 hover:bg-customOrange transition duration-300">Administração</Link>
+    <Link to="/loginAdmin" className="text-lg text-white no-underline p-2 hover:bg-customOrange transition duration-300">Administração</Link>
   </li>
 </ul>
         </nav>
