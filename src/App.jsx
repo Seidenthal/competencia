@@ -35,7 +35,7 @@ const App = () => {
               <div className="bg-customPurple rounded-full p-8 mb-12 mx-auto w-44 h-44">
                 <img src="/imagens/Icone1.png" alt="Icon 1" className="w-full h-full" />
               </div>
-              <h3 className="mb-2 font-bold">Alunas</h3>
+              <h3 className="mb-2  text-3xl font-bold">Alunas</h3>
               <p className="mb-5 text-black">Deseja participar do projeto? Cadastre-se.</p>
               <Link to="/loginAluna" className="text-black no-underline border border-black p-2 rounded hover:bg-white transition duration-300">Saiba Mais</Link>
             </div>
@@ -43,7 +43,7 @@ const App = () => {
               <div className="bg-customPurple rounded-full p-8 mb-12 mx-auto w-44 h-44">
                 <img src="/imagens/Icone2.png" alt="Icon 2" className="w-full h-full" />
               </div>
-              <h3 className="mb-2 font-bold">Tutores</h3>
+              <h3 className="mb-2 text-3xl font-bold">Tutores</h3>
               <p className="mb-5 text-black">Área dos Tutores.</p>
               <Link to="/loginTutora" className="text-black no-underline border border-black p-2 rounded hover:bg-white transition duration-300">Saiba Mais</Link>
             </div>
