@@ -1,9 +1,11 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+
+import { useForm, Controller } from "react-hook-form";
+import InputMask from "react-input-mask";
 
 const RegisterAluna = () => {
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
     reset,
@@ -54,7 +56,7 @@ const RegisterAluna = () => {
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
-          Cadastro de Aluna
+          Cadastro de Tutora
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
@@ -74,22 +76,46 @@ const RegisterAluna = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Telefone:</label>
+            <label className="block text-gray-700 font-semibold mb-2">Curso:</label>
             <input
               type="text"
-              {...register("telefone", {
+              {...register("curso", { required: "Curso é obrigatório." })}
+              className={`w-full px-3 py-2 border ${
+                errors.curso ? "border-red-500" : "border-gray-300"
+              } rounded focus:outline-none focus:ring ${
+                errors.curso ? "focus:ring-red-500" : "focus:ring-blue-300"
+              }`}
+            />
+            {errors.curso && (
+              <span className="text-red-500 text-sm">{errors.curso.message}</span>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700 font-semibold mb-2">Telefone:</label>
+            <Controller
+              name="telefone"
+              control={control}
+              defaultValue=""
+              rules={{
                 required: "Telefone é obrigatório.",
                 pattern: {
                   value: /^\(\d{2}\) \d{4,5}-\d{4}$/,
                   message: "Formato inválido. Ex: (XX) XXXXX-XXXX",
                 },
-              })}
-              placeholder="(XX) XXXXX-XXXX"
-              className={`w-full px-3 py-2 border ${
-                errors.telefone ? "border-red-500" : "border-gray-300"
-              } rounded focus:outline-none focus:ring ${
-                errors.telefone ? "focus:ring-red-500" : "focus:ring-blue-300"
-              }`}
+              }}
+              render={({ field }) => (
+                <InputMask
+                  {...field}
+                  mask="(99) 99999-9999"
+                  className={`w-full px-3 py-2 border ${
+                    errors.telefone ? "border-red-500" : "border-gray-300"
+                  } rounded focus:outline-none focus:ring ${
+                    errors.telefone ? "focus:ring-red-500" : "focus:ring-blue-300"
+                  }`}
+                  placeholder="(XX) XXXXX-XXXX"
+                />
+              )}
             />
             {errors.telefone && (
               <span className="text-red-500 text-sm">
@@ -131,22 +157,6 @@ const RegisterAluna = () => {
             />
             {errors.ra && (
               <span className="text-red-500 text-sm">{errors.ra.message}</span>
-            )}
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Curso:</label>
-            <input
-              type="text"
-              {...register("curso", { required: "Curso é obrigatório." })}
-              className={`w-full px-3 py-2 border ${
-                errors.curso ? "border-red-500" : "border-gray-300"
-              } rounded focus:outline-none focus:ring ${
-                errors.curso ? "focus:ring-red-500" : "focus:ring-blue-300"
-              }`}
-            />
-            {errors.curso && (
-              <span className="text-red-500 text-sm">{errors.curso.message}</span>
             )}
           </div>
 

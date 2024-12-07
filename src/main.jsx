@@ -10,8 +10,12 @@ import LoginTutora from './LoginTutora.jsx';
 import LoginAluna from './LoginAluna.jsx';
 import RegisterAluna from './RegisterAluna.jsx'
 import RegisterTutora from './RegisterTutora.jsx'
-
+import Sobre from './sobre.jsx';
 const router = createBrowserRouter([
+  {
+   path: 'sobre',
+    element: <Sobre />,
+  },
   {
     path: '',
     element: <App />,

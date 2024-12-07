@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { useNavigate } from 'react-router-dom';
 const LoginAdmin = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -22,7 +23,7 @@ const LoginAdmin = () => {
       const response = await res.json();
       if (res.ok) {
         // Redirecionar para o dashboard do Admin
-        window.location.href = '/admin-dashboard';
+        navigate('/adminDashboard');
       } else {
         setError(response.message || 'Erro ao fazer login.');
       }
