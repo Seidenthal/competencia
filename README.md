@@ -1,22 +1,8 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Projeto React com Vite
-
-Este projeto utiliza React com Vite para um desenvolvimento rápido e eficiente. Siga as instruções abaixo para configurar o ambiente de desenvolvimento.
-
 ## Pré-requisitos
 
 - Git
 - [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm)
-
-## Instalação
+- [PostegreSQL] (https://www.postgresql.org/download/)
 
 ### Passo 1: Clonar o Repositório
 
@@ -56,15 +42,48 @@ nvm install node
 nvm use node
 ```
 
-### Passo 4: Instalar Dependências
+## Instalação Backend
 
-Com a versão correta do Node.js ativa, instale as dependências do projeto:
+### Passo 4: Instale o PostgreSQL
+
+Siga as instruções de download no link a cima.
+
+### Passo 5: Criação do BD
+
+Execute o pgAdimin (arquivo instalado pelo PostgreSQL).
+Ao criar o usuário no PostgreSQL deixe o nome de usuário como postgre e defina a senha como admin.
+Caso você já tenha baixado altere o arquivo database.js o nome e senha a serem utilizadas.
+Dentro do aplicativo crie um novo Database com o nome "Certificadora3" e deixe o aplicativo aberto.
+
+### Passo 6: Instalação das dependências
+
+Abra um terminal na pasta backend do projeto e digite o comando:
 
 ```
 npm install
 ```
 
-### Passo 5: Rodar o Projeto
+### Passo 7: Execute o Backend
+
+Ainda no terminal na pasta backend digite o comando:
+
+```
+npm start
+```
+
+Ao executar esse comando as tabelas e usuários básicos serão definidos automaticamente.
+
+## Instalação Front
+
+### Passo 8: Instalar Dependências
+
+Com a versão correta do Node.js ativa abre um terminal na pasta raiz do projeto, instale as dependências do projeto, o package.json garantira que a versão correta sera instalada:
+
+```
+npm install
+```
+
+### Passo 9: Rodar o Projeto
 
 Inicie o servidor de desenvolvimento:
 
