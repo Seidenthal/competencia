@@ -14,10 +14,6 @@ const Tutora = db.define('Tutora', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  ra: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
