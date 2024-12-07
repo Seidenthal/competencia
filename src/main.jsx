@@ -34,6 +34,14 @@ const router = createBrowserRouter([
     path: 'loginAluna',
     element: <LoginAluna />,
   },
+  {
+    path: 'registerTutora',
+    element: <RegisterTutora />,
+  },
+  {
+    path: 'registerAluna',
+    element: <RegisterAluna />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

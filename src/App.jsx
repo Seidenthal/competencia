@@ -30,6 +30,16 @@ function App() {
           Ir para o LoginAluna
         </button>
       </div>
+      <div>
+        <button onClick={() => navigate('/RegisterAluna')}>
+          Ir para o RegisterAluna
+        </button>
+      </div>
+      <div>
+        <button onClick={() => navigate('/RegisterTutora')}>
+          Ir para o RegisterTutora
+        </button>
+      </div>
     </div>
   );
 }
