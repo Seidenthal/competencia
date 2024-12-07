@@ -17,7 +17,7 @@ db.authenticate()
 db.sync()
   .then(async () => {
     console.log('Tables have been created');
-    // Criar um Admin padrão
+    //Admin padrão
     const admin = await Admin.findOne({ where: { email: 'admin@admin.com' } });
     if (!admin) {
       await Admin.create({ email: 'admin@admin.com', senha: 'admin123' });
