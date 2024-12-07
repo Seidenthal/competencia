@@ -4,6 +4,9 @@
 - [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm)
 - [PostegreSQL] (https://www.postgresql.org/download/)
 
+## Link para o Video de Instalação das Ferramentas e Execução do Sistema
+https://drive.google.com/file/d/17aDbBItIseMNCzrvDxiy3Omo_z2OPbB2/view?usp=sharing
+
 ### Passo 1: Clonar o Repositório
 
 Clone o repositório para a sua máquina local usando o comando:
