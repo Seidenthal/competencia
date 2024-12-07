@@ -77,7 +77,7 @@ Ao executar esse comando as tabelas e usuários básicos serão definidos automa
 
 ### Passo 8: Instalar Dependências
 
-Com a versão correta do Node.js ativa, instale as dependências do projeto, o package.json garantira que a versão correta sera instalada:
+Com a versão correta do Node.js ativa abre um terminal na pasta raiz do projeto, instale as dependências do projeto, o package.json garantira que a versão correta sera instalada:
 
 ```
 npm install
