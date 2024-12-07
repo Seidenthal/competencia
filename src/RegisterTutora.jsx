@@ -28,6 +28,9 @@ const RegisterTutora = () => {
           "Cadastro realizado com sucesso! Aguarde até 5 dias úteis para aprovação."
         );
         reset();
+        setTimeout(() => {
+          window.location.href = "/loginTutora";
+        }, 3000);
       } else {
         alert(response.message || "Erro ao realizar cadastro.");
       }

@@ -1,7 +1,6 @@
 
 import { useForm, Controller } from "react-hook-form";
 import InputMask from "react-input-mask";
-
 const RegisterAluna = () => {
   const {
     register,
@@ -10,7 +9,7 @@ const RegisterAluna = () => {
     formState: { errors },
     reset,
   } = useForm();
-
+  
   const onSubmit = async (data) => {
     try {
       const res = await fetch("http://localhost:5000/api/alunas/register", {
@@ -28,6 +27,9 @@ const RegisterAluna = () => {
           "Cadastro realizado com sucesso! Aguarde até 5 dias úteis para aprovação."
         );
         reset();
+        setTimeout(() => {
+          window.location.href = "/loginAluna";
+        }, 3000);
       } else {
         alert(response.message || "Erro ao realizar cadastro.");
       }
