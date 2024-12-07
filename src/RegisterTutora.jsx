@@ -53,10 +53,10 @@ const RegisterTutora = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen bg-pink-300">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
-          Cadastro de Tutora
+          Cadastro de Tutoria
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
@@ -129,22 +129,6 @@ const RegisterTutora = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">RA:</label>
-            <input
-              type="text"
-              {...register("ra", { required: "RA é obrigatório." })}
-              className={`w-full px-3 py-2 border ${
-                errors.ra ? "border-red-500" : "border-gray-300"
-              } rounded focus:outline-none focus:ring ${
-                errors.ra ? "focus:ring-red-500" : "focus:ring-blue-300"
-              }`}
-            />
-            {errors.ra && (
-              <span className="text-red-500 text-sm">{errors.ra.message}</span>
-            )}
-          </div>
-
-          <div className="mb-4">
             <label className="block text-gray-700 font-semibold mb-2">Email:</label>
             <input
               type="email"
@@ -194,7 +178,7 @@ const RegisterTutora = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-customOrange"
           >
             Cadastrar
           </button>

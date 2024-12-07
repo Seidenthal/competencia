@@ -53,10 +53,10 @@ const RegisterAluna = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen bg-pink-300">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
-          Cadastro de Tutora
+          Cadastro de Alunas
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
@@ -210,7 +210,7 @@ const RegisterAluna = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-customOrange"
           >
             Cadastrar
           </button>
