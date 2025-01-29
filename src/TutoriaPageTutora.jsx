@@ -1,37 +1,49 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Section from './Section';
 
 function TutoriaPageTutora() {
   const [sections, setSections] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingSection, setEditingSection] = useState(null);
+
   const [newSection, setNewSection] = useState({
     title: '',
     description: '',
     files: [],
+    deadline: '',
   });
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Adicionar uma nova seção
-  const handleAddSection = () => {
+  // Adicionar ou Editar uma seção
+  const handleSaveSection = () => {
     if (newSection.title.trim() && newSection.description.trim()) {
-      setSections([...sections, { ...newSection }]);
-      setNewSection({ title: '', description: '', files: [] });
-      setIsModalOpen(false); // Fecha o modal após adicionar a seção
+      const updatedSections = [...sections];
+
+      if (editingSection !== null) {
+        updatedSections[editingSection] = { ...newSection };
+      } else {
+        updatedSections.push({ ...newSection });
+      }
+
+      setSections(updatedSections);
+      setNewSection({ title: '', description: '', files: [], deadline: '' });
+      setEditingSection(null);
+      setIsModalOpen(false);
     }
   };
 
-  // Excluir uma seção
-  const handleDeleteSection = (sectionIndex) => {
-    setSections(sections.filter((_, index) => index !== sectionIndex));
+  // Abrir modal para editar seção
+  const handleEditSection = (index) => {
+    setEditingSection(index);
+    setNewSection(sections[index]);
+    setIsModalOpen(true);
   };
 
-  // Upload de arquivos em uma seção
-  const handleFileUpload = (sectionIndex, files) => {
-    const updatedSections = [...sections];
-    updatedSections[sectionIndex].files = [
-      ...updatedSections[sectionIndex].files,
-      ...files,
-    ];
-    setSections(updatedSections);
+  // Upload de arquivos no modal
+  const handleFileUpload = (files) => {
+    setNewSection((prev) => ({
+      ...prev,
+      files: [...prev.files, ...files],
+    }));
   };
 
   // Excluir um arquivo específico de uma seção
@@ -43,6 +55,11 @@ function TutoriaPageTutora() {
     setSections(updatedSections);
   };
 
+  // Excluir uma seção
+  const handleDeleteSection = (sectionIndex) => {
+    setSections(sections.filter((_, index) => index !== sectionIndex));
+  };
+
   return (
     <div className="bg-pink-100 min-h-screen p-8">
       <header className="p-4 bg-customPurple text-white mb-6">
@@ -51,7 +68,6 @@ function TutoriaPageTutora() {
         </h1>
       </header>
 
-      {/* Renderização das seções usando o componente Section */}
       <div className="space-y-8">
         {sections.map((section, sectionIndex) => (
           <Section
@@ -59,15 +75,31 @@ function TutoriaPageTutora() {
             title={section.title}
             description={section.description}
             files={section.files}
-            onUpload={(files) => handleFileUpload(sectionIndex, files)}
+            deadline={section.deadline}
             onDeleteFile={(fileIndex) =>
               handleDeleteFile(sectionIndex, fileIndex)
             }
-            onDeleteSection={() => handleDeleteSection(sectionIndex)} // Passa a função de exclusão da seção
-          />
+          >
+            {/* Botões dentro da seção */}
+            <div className="flex justify-end space-x-2">
+              <button
+                onClick={() => handleEditSection(sectionIndex)}
+                className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600"
+              >
+                Editar
+              </button>
+
+              <button
+                onClick={() => handleDeleteSection(sectionIndex)}
+                className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+              >
+                Excluir
+              </button>
+            </div>
+          </Section>
         ))}
 
-        {/* Botão para abrir o modal, posicionado logo abaixo das seções */}
+        {/* Botão para abrir o modal */}
         <div className="flex justify-end">
           <button
             onClick={() => setIsModalOpen(true)}
@@ -78,11 +110,16 @@ function TutoriaPageTutora() {
         </div>
       </div>
 
-      {/* Modal para adicionar uma nova seção */}
+      {/* Modal para Adicionar/Editar Seção */}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
-            <h2 className="text-lg font-bold mb-4">Adicionar Nova Seção</h2>
+            <h2 className="text-lg font-bold mb-4">
+              {editingSection !== null
+                ? 'Editar Seção'
+                : 'Adicionar Nova Seção'}
+            </h2>
+
             <input
               type="text"
               placeholder="Título da Seção"
@@ -92,6 +129,7 @@ function TutoriaPageTutora() {
               }
               className="w-full p-2 border border-gray-300 rounded mb-4"
             />
+
             <textarea
               placeholder="Descrição da Seção"
               value={newSection.description}
@@ -100,20 +138,35 @@ function TutoriaPageTutora() {
               }
               className="w-full p-2 border border-gray-300 rounded mb-4"
             ></textarea>
-            <div className="flex space-x-4">
-              <button
-                onClick={handleAddSection}
-                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-              >
-                Salvar
-              </button>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
-              >
-                Cancelar
-              </button>
-            </div>
+
+            <label className="block text-gray-700 font-semibold mb-2">
+              Prazo:
+            </label>
+            <input
+              type="date"
+              value={newSection.deadline || ''}
+              onChange={(e) =>
+                setNewSection({ ...newSection, deadline: e.target.value })
+              }
+              className="w-full p-2 border border-gray-300 rounded mb-4"
+            />
+
+            <label className="block text-gray-700 font-semibold mb-2">
+              Arquivos:
+            </label>
+            <input
+              type="file"
+              multiple
+              onChange={(e) => handleFileUpload(Array.from(e.target.files))}
+              className="w-full text-sm text-gray-500 mb-4"
+            />
+
+            <button
+              onClick={handleSaveSection}
+              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+            >
+              Salvar
+            </button>
           </div>
         </div>
       )}

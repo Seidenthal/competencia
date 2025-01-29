@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import { ChevronDown, ChevronRight, Trash2 } from 'lucide-react';
 
 const Section = ({
   title,
   description,
   files,
-  onUpload,
+  deadline,
   onDeleteFile,
-  onDeleteSection,
+  children,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -19,28 +19,28 @@ const Section = ({
   return (
     <div className="flex flex-col bg-white rounded-md p-4 shadow-md">
       <div className="flex flex-row justify-between items-center">
-        <button
-          onClick={toggleExpand}
-          style={{ cursor: 'pointer' }}
-          className="text-gray-700"
-        >
+        <button onClick={toggleExpand} className="text-gray-700">
           {isExpanded ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
         </button>
         <span className="text-lg font-bold text-gray-800">{title}</span>
       </div>
 
-      {/* Conteúdo expandido */}
       {isExpanded && (
         <div className="mt-4 space-y-4">
-          {/* Descrição */}
           <p className="text-gray-600">{description}</p>
+
+          {deadline && (
+            <p className="text-red-500 text-sm">
+              Prazo: {new Date(deadline).toLocaleDateString('pt-BR')}
+            </p>
+          )}
 
           {/* Lista de Arquivos */}
           <div>
             <h4 className="text-md font-semibold">Arquivos:</h4>
             <ul className="list-disc pl-5 space-y-1">
               {files.map((file, index) => (
-                <li key={index} className="flex items-center justify-between">
+                <li key={index} className="flex justify-between items-center">
                   <a
                     href={URL.createObjectURL(file)}
                     target="_blank"
@@ -51,34 +51,17 @@ const Section = ({
                   </a>
                   <button
                     onClick={() => onDeleteFile(index)}
-                    className="text-red-500 hover:text-red-700 text-sm"
+                    className="text-red-500 hover:text-red-700 ml-2"
                   >
-                    Excluir
+                    <Trash2 size={16} />
                   </button>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Upload de Arquivos */}
-          <div>
-            <input
-              type="file"
-              multiple
-              onChange={(e) => onUpload(Array.from(e.target.files))}
-              className="w-full text-sm text-gray-500"
-            />
-          </div>
-
-          {/* Botão Excluir Seção */}
-          <div className="flex justify-end">
-            <button
-              onClick={onDeleteSection}
-              className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
-            >
-              Excluir Seção
-            </button>
-          </div>
+          {/* Exibir botões SOMENTE quando a seção está expandida */}
+          <div className="mt-4">{children}</div>
         </div>
       )}
     </div>
@@ -89,9 +72,9 @@ Section.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   files: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onUpload: PropTypes.func.isRequired,
+  deadline: PropTypes.string,
   onDeleteFile: PropTypes.func.isRequired,
-  onDeleteSection: PropTypes.func.isRequired,
+  children: PropTypes.node,
 };
 
 export default Section;
