@@ -1,12 +1,15 @@
 import Section from './Section';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
-function TutoriaPage() {
-  const sections = [
-    { title: 'Seção 1', content: 'Conteúdo da Seção 1' },
-    { title: 'Seção 2', content: 'Conteúdo da Seção 2' },
-    { title: 'Seção 3', content: 'Conteúdo da Seção 3' },
-  ];
+function TutoriaPageAluna() {
+  const [sections] = useState([
+    {
+      title: '',
+      description: '',
+      files: [],
+    },
+  ]);
 
   return (
     <div className="bg-pink-100 min-h-screen">
@@ -35,19 +38,18 @@ function TutoriaPage() {
           </ul>
         </nav>
       </header>
-      <div>
-        <ul className="space-y-4 p-8">
-          {sections.map((section, index) => (
-            <Section
-              key={index}
-              title={section.title}
-              content={section.content}
-            />
-          ))}
-        </ul>
+      <div className="space-y-8">
+        {sections.map((section, sectionIndex) => (
+          <Section
+            key={sectionIndex}
+            title={section.title}
+            description={section.description}
+            files={section.files}
+          />
+        ))}
       </div>
     </div>
   );
 }
 
-export default TutoriaPage;
+export default TutoriaPageAluna;

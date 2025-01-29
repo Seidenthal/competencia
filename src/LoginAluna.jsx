@@ -24,7 +24,7 @@ const LoginAluna = () => {
         console.log(response);
         alert('Login bem-sucedido!');
         // Redirecionar para o dashboard ou outra rota
-        window.location.href = '/dashboard-aluna';
+        window.location.href = '/tutoria';
       } else {
         alert(response.message || 'Erro ao fazer login.');
       }

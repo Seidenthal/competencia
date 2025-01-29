@@ -2,18 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import TutoriaPage from './TutoriaPage';
+import TutoriaPageTutora from './TutoriaPageTutora.jsx';
+import TutoriaPageAluna from './TutoriaPageAluna.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AdminDashboard from './AdminDashboard.jsx';
 import LoginAdmin from './LoginAdm.jsx';
 import LoginTutora from './LoginTutora.jsx';
 import LoginAluna from './LoginAluna.jsx';
-import RegisterAluna from './RegisterAluna.jsx'
-import RegisterTutora from './RegisterTutora.jsx'
+import RegisterAluna from './RegisterAluna.jsx';
+import RegisterTutora from './RegisterTutora.jsx';
 import Sobre from './sobre.jsx';
 const router = createBrowserRouter([
   {
-   path: 'sobre',
+    path: 'sobre',
     element: <Sobre />,
   },
   {
@@ -21,8 +22,12 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: 'tutoria',
-    element: <TutoriaPage />,
+    path: 'tutoriaTutora',
+    element: <TutoriaPageTutora />,
+  },
+  {
+    path: 'tutoriaAluna',
+    element: <TutoriaPageAluna />,
   },
   {
     path: 'adminDashboard',
