@@ -12,6 +12,9 @@ import LoginAluna from './LoginAluna.jsx';
 import RegisterAluna from './RegisterAluna.jsx';
 import RegisterTutora from './RegisterTutora.jsx';
 import Sobre from './sobre.jsx';
+import EncontrosAluna from './EncontrosAluna.jsx';
+import EncontrosTutora from './EncontrosTutora.jsx';
+
 const router = createBrowserRouter([
   {
     path: 'sobre',
@@ -52,6 +55,14 @@ const router = createBrowserRouter([
   {
     path: 'registerAluna',
     element: <RegisterAluna />,
+  },
+  {
+    path: 'encontrosAluna',
+    element: <EncontrosAluna />,
+  },
+  {
+    path: 'encontrosTutora',
+    element: <EncontrosTutora />,
   },
 ]);
 
