@@ -8,7 +8,7 @@ const HomePage = () => {
     '/imagens/imagemBanner1.jpg',
     '/imagens/imagemBanner2.jpg',
     '/imagens/imagemBanner3.jpg',
-    '/imagens/imagemBanner4.jpg'
+    '/imagens/imagemBanner4.jpg',
   ];
 
   useEffect(() => {
@@ -32,12 +32,18 @@ const HomePage = () => {
         <nav className="mr-10">
           <ul className="flex space-x-6">
             <li>
-              <Link to="/" className="text-lg text-white p-2 hover:bg-customOrange transition duration-300">
+              <Link
+                to="/"
+                className="text-lg text-white p-2 hover:bg-customOrange transition duration-300"
+              >
                 Página Inicial
               </Link>
             </li>
             <li>
-              <Link to="/sobre" className="text-lg text-white p-2 hover:bg-customOrange transition duration-300">
+              <Link
+                to="/sobre"
+                className="text-lg text-white p-2 hover:bg-customOrange transition duration-300"
+              >
                 Sobre Nós
               </Link>
             </li>
@@ -46,21 +52,31 @@ const HomePage = () => {
       </header>
 
       {/* Banner de imagens */}
-      <div className="w-[750px] h-[400px] mt-6">
-        <img src={images[currentImage]} alt="Banner" className="w-full h-full object-cover rounded shadow-md" />
+      <div className="w-9/12 mt-6">
+        <img
+          src={images[currentImage]}
+          alt="Banner"
+          className="w-full h-full object-cover rounded shadow-md"
+        />
       </div>
 
       {/* Calendário*/}
-      <div className="w-[900px] bg-white p2 rounded shadow-md mt-6">
+      <div className="w-[940px] bg-white p2 rounded shadow-md mt-6">
         <Calendar events={eventos} />
       </div>
 
       {/* Botões */}
-      <div className="mt-6 flex gap-5">
-        <Link to="/atividades" className="bg-blue-500 text-white py-4 px-7 rounded hover:bg-customOrange">
+      <div className="mt-6 flex gap-5 pb-4">
+        <Link
+          to="/tutoriaPageAluna"
+          className="bg-blue-500 text-white py-4 px-7 rounded hover:bg-customOrange"
+        >
           Atividades
         </Link>
-        <Link to="/encontrosAluna" className="bg-blue-500 text-white py-4 px-7 rounded hover:bg-customOrange">
+        <Link
+          to="/encontrosAluna"
+          className="bg-blue-500 text-white py-4 px-7 rounded hover:bg-customOrange"
+        >
           Próximos Encontros
         </Link>
       </div>
