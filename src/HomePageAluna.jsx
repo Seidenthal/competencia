@@ -49,11 +49,11 @@ const HomePage = () => {
             </li>
             <li>
               <Link
-                to = "/minhaConta"
-                classname = "text-lg text-white p-2 hover:bg-customOrange transition duration-300"
+                to="/minhaConta"
+                classname="text-lg text-white p-2 hover:bg-customOrange transition duration-300"
               >
                 Minha Conta
-                </Link>
+              </Link>
             </li>
           </ul>
         </nav>

@@ -4,35 +4,35 @@ const db = require('../config/database');
 const Section = db.define('Section', {
   title: {
     type: DataTypes.STRING,
-    
-    allowNull: false
+
+    allowNull: false,
   },
   description: {
     type: DataTypes.TEXT,
-    allowNull: false
+    allowNull: false,
   },
   deadline: {
     type: DataTypes.DATE,
-    allowNull: true
+    allowNull: true,
   },
   files: {
     type: DataTypes.JSONB,
-    allowNull: true
+    allowNull: true,
   },
-  tutoraid: {
+  tutoraId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
     references: {
       model: 'Tutoras',
-      key: 'id' //
-    }
+      key: 'id', //
+    },
   },
   index: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    autoIncrement: true
-  }
+    autoIncrement: true,
+  },
 });
 
 module.exports = Section;
