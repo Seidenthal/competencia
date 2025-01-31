@@ -34,7 +34,14 @@ const Aluna = db.define('Aluna', {
   aprovado: {
     type: DataTypes.BOOLEAN,
     defaultValue: false
+  },
+  tutoraId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: 'Tutoras',
+      key: 'id'
+    }
   }
 });
-
 module.exports = Aluna;

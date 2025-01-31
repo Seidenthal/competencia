@@ -10,7 +10,7 @@ const LoginTutora = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await fetch('http://localhost:5000/api/tutora/login', {
+      const res = await fetch('http://localhost:5000/api/tutoras/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ const LoginTutora = () => {
         console.log(response);
         alert('Login bem-sucedido!');
         // Redirecionar para o dashboard ou outra rota
-        window.location.href = '/dashboard-tutora';
+        window.location.href = '/tutoriaPageTutora';
       } else {
         alert(response.message || 'Erro ao fazer login.');
       }
