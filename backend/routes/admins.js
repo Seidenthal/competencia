@@ -4,6 +4,22 @@ const Admin = require('../models/Admin');
 const Tutora = require('../models/Tutora');
 const Aluna = require('../models/Aluna');
 
+router.post('/associar-tutora', async (req, res) => {
+  const { alunaId, tutoraId } = req.body;
+  try {
+    const aluna = await Aluna.findByPk(alunaId);
+    if (aluna) {
+      aluna.tutoraId = tutoraId;
+      await aluna.save();
+      res.json({ message: 'Tutora associada à aluna com sucesso', aluna });
+    } else {
+      res.status(404).json({ message: 'Aluna não encontrada' });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Login do Admin
 router.post('/login', async (req, res) => {
   const { email, senha } = req.body;

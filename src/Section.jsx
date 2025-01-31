@@ -16,6 +16,11 @@ const Section = ({
     setIsExpanded(!isExpanded);
   };
 
+  const createFileURL = (file) => {
+    const blob = new Blob([new Uint8Array(file.data.data)], { type: file.type });
+    return URL.createObjectURL(blob);
+  };
+
   return (
     <div className="flex flex-col bg-white rounded-md p-4 shadow-md">
       <div className="flex flex-row justify-between items-center">
@@ -42,9 +47,8 @@ const Section = ({
               {files.map((file, index) => (
                 <li key={index} className="flex justify-between items-center">
                   <a
-                    href={URL.createObjectURL(file)}
-                    target="_blank"
-                    rel="noreferrer"
+                    href={createFileURL(file)}
+                    download={file.name}
                     className="text-blue-500 hover:underline"
                   >
                     {file.name}

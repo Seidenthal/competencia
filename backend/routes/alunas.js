@@ -6,7 +6,7 @@ const Aluna = require('../models/Aluna');
 router.post('/register', async (req, res) => {
   const { nome, telefone, cpf, ra, curso, email, senha } = req.body;
   try {
-    const aluna = await Aluna.create({ nome, telefone, cpf, ra, curso, email, senha });
+    const aluna = await Aluna.create({ nome, telefone, cpf, ra, curso, email, senha, tutoraId: null });
     res.json(aluna);
   } catch (err) {
     res.status(500).json({ error: err.message });

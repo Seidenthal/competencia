@@ -29,6 +29,7 @@ db.sync()
 app.use('/api/tutoras', require('./routes/tutoras'));
 app.use('/api/alunas', require('./routes/alunas'));
 app.use('/api/admins', require('./routes/admins'));
+app.use('/api/sections', require('./routes/sections')); // Adicionando a rota sections
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));

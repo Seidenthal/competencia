@@ -12,5 +12,18 @@ router.post('/register', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
+// Login de Tutora
+router.post('/login', async (req, res) => {
+  const { email, senha } = req.body;
+  try {
+    const tutora = await Tutora.findOne({ where: { email, senha, aprovado: true } });
+    if (tutora) {
+      res.json({ message: 'Login successful', tutora });
+    } else {
+      res.status(401).json({ message: 'Invalid credentials or not approved' });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 module.exports = router;

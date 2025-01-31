@@ -35,11 +35,11 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: 'tutoriaTutora',
+    path: 'tutoriaPageTutora',
     element: <TutoriaPageTutora />,
   },
   {
-    path: 'tutoriaAluna',
+    path: 'tutoriaPageAluna',
     element: <TutoriaPageAluna />,
   },
   {
