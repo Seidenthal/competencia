@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Section from './Section';
 
 function TutoriaPageTutora() {
@@ -13,32 +13,65 @@ function TutoriaPageTutora() {
     deadline: '',
   });
 
-  // Adicionar ou Editar uma seção
-  const handleSaveSection = () => {
-    if (newSection.title.trim() && newSection.description.trim()) {
-      const updatedSections = [...sections];
-
-      if (editingSection !== null) {
-        updatedSections[editingSection] = { ...newSection };
-      } else {
-        updatedSections.push({ ...newSection });
+  useEffect(() => {
+    const fetchSections = async () => {
+      try {
+        const res = await fetch('http://localhost:5000/api/sections');
+        const data = await res.json();
+        setSections(data);
+      } catch (err) {
+        console.error('Erro ao buscar seções:', err);
       }
+    };
 
-      setSections(updatedSections);
-      setNewSection({ title: '', description: '', files: [], deadline: '' });
-      setEditingSection(null);
-      setIsModalOpen(false);
+    fetchSections();
+  }, []);
+
+  const handleSaveSection = async () => {
+    if (newSection.title.trim() && newSection.description.trim()) {
+      try {
+        let updatedSections = [...sections];
+
+        const formData = new FormData();
+        formData.append('title', newSection.title);
+        formData.append('description', newSection.description);
+        formData.append('deadline', newSection.deadline);
+        newSection.files.forEach((file) => {
+          formData.append('files', file);
+        });
+
+        if (editingSection !== null) {
+          const res = await fetch(`http://localhost:5000/api/sections/update/${sections[editingSection].id}`, {
+            method: 'PUT',
+            body: formData,
+          });
+          const updatedSection = await res.json();
+          updatedSections[editingSection] = updatedSection;
+        } else {
+          const res = await fetch('http://localhost:5000/api/sections/add', {
+            method: 'POST',
+            body: formData,
+          });
+          const addedSection = await res.json();
+          updatedSections.push(addedSection);
+        }
+
+        setSections(updatedSections);
+        setNewSection({ title: '', description: '', files: [], deadline: '' });
+        setEditingSection(null);
+        setIsModalOpen(false);
+      } catch (err) {
+        console.error('Erro ao salvar seção:', err);
+      }
     }
   };
 
-  // Abrir modal para editar seção
   const handleEditSection = (index) => {
     setEditingSection(index);
     setNewSection(sections[index]);
     setIsModalOpen(true);
   };
 
-  // Upload de arquivos no modal
   const handleFileUpload = (files) => {
     setNewSection((prev) => ({
       ...prev,
@@ -46,18 +79,22 @@ function TutoriaPageTutora() {
     }));
   };
 
-  // Excluir um arquivo específico de uma seção
   const handleDeleteFile = (sectionIndex, fileIndex) => {
     const updatedSections = [...sections];
-    updatedSections[sectionIndex].files = updatedSections[
-      sectionIndex
-    ].files.filter((_, i) => i !== fileIndex);
+    updatedSections[sectionIndex].files = updatedSections[sectionIndex].files.filter((_, i) => i !== fileIndex);
     setSections(updatedSections);
   };
 
-  // Excluir uma seção
-  const handleDeleteSection = (sectionIndex) => {
-    setSections(sections.filter((_, index) => index !== sectionIndex));
+  const handleDeleteSection = async (sectionIndex) => {
+    try {
+      const sectionId = sections[sectionIndex].id;
+      await fetch(`http://localhost:5000/api/sections/delete/${sectionId}`, {
+        method: 'DELETE',
+      });
+      setSections(sections.filter((_, index) => index !== sectionIndex));
+    } catch (err) {
+      console.error('Erro ao excluir seção:', err);
+    }
   };
 
   return (
@@ -80,7 +117,6 @@ function TutoriaPageTutora() {
               handleDeleteFile(sectionIndex, fileIndex)
             }
           >
-            {/* Botões dentro da seção */}
             <div className="flex justify-end space-x-2">
               <button
                 onClick={() => handleEditSection(sectionIndex)}
@@ -99,7 +135,6 @@ function TutoriaPageTutora() {
           </Section>
         ))}
 
-        {/* Botão para abrir o modal */}
         <div className="flex justify-end">
           <button
             onClick={() => setIsModalOpen(true)}
@@ -110,7 +145,6 @@ function TutoriaPageTutora() {
         </div>
       </div>
 
-      {/* Modal para Adicionar/Editar Seção */}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
@@ -144,7 +178,7 @@ function TutoriaPageTutora() {
             </label>
             <input
               type="date"
-              value={newSection.deadline || ''}
+              value={newSection.deadline ? newSection.deadline.split('T')[0] : ''}
               onChange={(e) =>
                 setNewSection({ ...newSection, deadline: e.target.value })
               }
