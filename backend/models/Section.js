@@ -4,6 +4,7 @@ const db = require('../config/database');
 const Section = db.define('Section', {
   title: {
     type: DataTypes.STRING,
+    
     allowNull: false
   },
   description: {
@@ -17,6 +18,20 @@ const Section = db.define('Section', {
   files: {
     type: DataTypes.JSONB,
     allowNull: true
+  },
+  tutoraid: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    references: {
+      model: 'Tutoras',
+      key: 'id' //
+    }
+  },
+  index: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true
   }
 });
 

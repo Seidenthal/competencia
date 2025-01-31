@@ -22,7 +22,8 @@ const LoginTutora = () => {
 
       if (res.ok) {
         console.log(response);
-        alert('Login bem-sucedido!');
+        alert(response.id);
+        localStorage.setItem('tutoraId', response.id);
         // Redirecionar para o dashboard ou outra rota
         window.location.href = '/tutoriaPageTutora';
       } else {

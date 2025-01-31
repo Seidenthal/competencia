@@ -16,9 +16,9 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   const { email, senha } = req.body;
   try {
-    const tutora = await Tutora.findOne({ where: { email, senha, aprovado: true } });
+    const tutora = await Tutora.findOne({ where: {email, senha, aprovado: true} });
     if (tutora) {
-      res.json({ message: 'Login successful', tutora });
+      res.json({ id: tutora.id});
     } else {
       res.status(401).json({ message: 'Invalid credentials or not approved' });
     }

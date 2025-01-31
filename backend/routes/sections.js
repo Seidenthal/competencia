@@ -7,22 +7,23 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 // Adicionar uma nova seção
 router.post('/add', upload.array('files'), async (req, res) => {
-  const { title, description, deadline } = req.body;
+  const { title, description, deadline, tutoraId} = req.body;
+
   const files = req.files.map(file => ({
     name: file.originalname,
     type: file.mimetype,
     data: file.buffer,
   }));
   try {
-    const section = await Section.create({ title, description, deadline, files });
+    const section = await Section.create({ title, description, deadline, files, tutoraId });
     res.json(section);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// Buscar todas as seções
-router.get('/', async (req, res) => {
+// Buscar todas as seções de uma tutora
+router.get('/:tutoraId', async (req, res) => {
   try {
     const sections = await Section.findAll();
     res.json(sections);
@@ -34,7 +35,7 @@ router.get('/', async (req, res) => {
 // Atualizar uma seção
 router.put('/update/:id', upload.array('files'), async (req, res) => {
   const { id } = req.params;
-  const { title, description, deadline } = req.body;
+  const { title, description, deadline} = req.body;
   const files = req.files.map(file => ({
     name: file.originalname,
     type: file.mimetype,
