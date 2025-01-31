@@ -14,7 +14,7 @@ const HomePage = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 3000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -25,26 +25,51 @@ const HomePage = () => {
 
   return (
     <div className="flex flex-col items-center bg-pink-300 min-h-screen">
-      <header className="w-full bg-white py-4 shadow-md flex justify-between items-center px-8">
-        <img src="/imagens/logo.png" alt="Meninas Digitais" className="h-12" />
-        <div>
-          <Link to="/sobre" className="mr-4 text-blue-500 hover:underline">Sobre</Link>
-          <Link to="/minhaConta" className="text-blue-500 hover:underline">Conta</Link>
+      <header className="flex justify-between items-center w-full p-4 bg-customPurple">
+        <div className="ml-10">
+          <img src="/imagens/logo.png" alt="Logo" className="h-36" />
         </div>
+        <nav className="mr-10">
+          <ul className="flex space-x-6">
+            <li>
+              <Link to="/" className="text-lg text-white p-2 hover:bg-customOrange transition duration-300">
+                Página Inicial
+              </Link>
+            </li>
+            <li>
+              <Link to="/sobre" className="text-lg text-white p-2 hover:bg-customOrange transition duration-300">
+                Sobre Nós
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </header>
 
-      <div className="w-full max-w-4xl mt-6">
-        <img src={images[currentImage]} alt="Banner" className="w-full rounded shadow-md" />
+      {/* Banner de imagens */}
+      <div className="w-[750px] h-[400px] mt-6">
+        <img src={images[currentImage]} alt="Banner" className="w-full h-full object-cover rounded shadow-md" />
       </div>
 
-      <div className="mt-6 w-full max-w-md bg-white p-4 rounded shadow-md">
+      {/* Calendário*/}
+      <div className="w-[900px] bg-white p2 rounded shadow-md mt-6">
         <Calendar events={eventos} />
       </div>
 
-      <div className="mt-4 flex gap-4">
-        <Link to="/atividades" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-customOrange">Atividades</Link>
-        <Link to="/proximos-encontros" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-customOrange">Próximos Encontros</Link>
+      {/* Botões */}
+      <div className="mt-6 flex gap-5">
+        <Link to="/atividades" className="bg-blue-500 text-white py-4 px-7 rounded hover:bg-customOrange">
+          Atividades
+        </Link>
+        <Link to="/encontrosAluna" className="bg-blue-500 text-white py-4 px-7 rounded hover:bg-customOrange">
+          Próximos Encontros
+        </Link>
       </div>
+      <footer className="bg-customOrange text-white text-center p-8 w-full">
+        <p>
+          Desenvolvido por: Igor Gustavo Mainardes, Daniel Seidenthal, Vinicius
+          Henrique Cerrone
+        </p>
+      </footer>
     </div>
   );
 };
