@@ -16,6 +16,7 @@ import EncontrosAluna from './EncontrosAluna.jsx';
 import EncontrosTutora from './EncontrosTutora.jsx';
 import MinhaConta from './MinhaConta.jsx';
 import Section from './Section.jsx';
+import HomePage from './HomePage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -24,11 +25,11 @@ const router = createBrowserRouter([
   },
   {
     path: 'minhaConta',
-    element: <MinhaConta/>,
+    element: <MinhaConta />,
   },
   {
     path: 'section',
-    element:<Section/>, 
+    element: <Section />,
   },
   {
     path: '',
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
   {
     path: 'encontrosTutora',
     element: <EncontrosTutora />,
+  },
+  {
+    path: 'homePage',
+    element: <HomePage />,
   },
 ]);
 
