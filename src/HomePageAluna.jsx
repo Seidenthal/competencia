@@ -47,6 +47,14 @@ const HomePage = () => {
                 Sobre Nós
               </Link>
             </li>
+            <li>
+              <Link
+                to = "/minhaConta"
+                classname = "text-lg text-white p-2 hover:bg-customOrange transition duration-300"
+              >
+                Minha Conta
+                </Link>
+            </li>
           </ul>
         </nav>
       </header>

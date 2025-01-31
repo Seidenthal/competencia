@@ -107,7 +107,9 @@ const LoginAluna = () => {
             type="submit"
             className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-customOrange"
           >
+            <Link to ="/homePageAluna">
             Login
+            </Link>
           </button>
         </form>
         <p className="mt-4 text-center text-gray-600">
