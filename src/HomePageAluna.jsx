@@ -50,7 +50,7 @@ const HomePage = () => {
             <li>
               <Link
                 to="/minhaConta"
-                classname="text-lg text-white p-2 hover:bg-customOrange transition duration-300"
+                className="text-lg text-white p-2 hover:bg-customOrange transition duration-300"
               >
                 Minha Conta
               </Link>
@@ -60,7 +60,7 @@ const HomePage = () => {
       </header>
 
       {/* Banner de imagens */}
-      <div className="w-9/12 mt-6">
+      <div className="w-9/9 mt-6">
         <img
           src={images[currentImage]}
           alt="Banner"
