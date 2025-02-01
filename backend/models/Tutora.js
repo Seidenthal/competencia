@@ -10,7 +10,7 @@ const Tutora = db.define('Tutora', {
   nome: {
     type: DataTypes.STRING,
     allowNull: false
-  },
+  }, 
   telefone: {
     type: DataTypes.STRING,
     allowNull: false

@@ -50,45 +50,6 @@ router.post('/add', upload.array('files'), async (req, res) => {
   }
 });
 
-//  Buscar todas as seções de uma tutora
-router.get('/:tutoraId', async (req, res) => {
-  try {
-    const { tutoraId } = req.params;
-
-    //  Buscar somente as seções da tutora especificada
-    const sections = await Section.findAll({ where: { tutoraId } });
-
-    res.json(sections);
-  } catch (err) {
-    console.error('Erro ao buscar seções:', err);
-    res.status(500).json({ error: 'Erro ao buscar seções.' });
-  }
-});
-
-//  Atualizar uma seção
-router.put('/update/:id', upload.array('files'), async (req, res) => {
-  try {
-    const { title, description, deadline, tutoraId } = req.body;
-    const files = req.files ? req.files.map((file) => file.path) : []; // Caminhos dos arquivos enviados
-
-    const section = await Section.findByPk(req.params.id);
-    if (section) {
-      // Atualiza os campos da seção
-      section.title = title;
-      section.description = description;
-      section.deadline = deadline;
-      section.files = files; // Atualiza os arquivos
-      await section.save();
-
-      res.json(section); // Retorna a seção atualizada
-    } else {
-      res.status(404).json({ error: 'Seção não encontrada' });
-    }
-  } catch (err) {
-    res.status(500).json({ error: 'Erro ao atualizar seção' });
-  }
-});
-
 //  Excluir uma seção
 router.delete('/delete/:id', async (req, res) => {
   try {
