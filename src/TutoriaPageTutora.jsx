@@ -172,12 +172,6 @@ function TutoriaPageTutora() {
           >
             <div className="flex justify-end space-x-2">
               <button
-                onClick={() => handleEditSection(sectionIndex)}
-                className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600"
-              >
-                Editar
-              </button>
-              <button
                 onClick={() => handleDeleteSection(sectionIndex)}
                 className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
               >
