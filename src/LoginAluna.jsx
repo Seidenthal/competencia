@@ -21,8 +21,7 @@ const LoginAluna = () => {
       const response = await res.json();
 
       if (res.ok) {
-        console.log(response);
-        alert('Login bem-sucedido!');
+        localStorage.setItem('alunaId', response.id);
         // Redirecionar para o dashboard ou outra rota
         window.location.href = '/homePageAluna';
       } else {

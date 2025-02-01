@@ -17,7 +17,9 @@ const Section = ({
   };
 
   const createFileURL = (file) => {
-    const blob = new Blob([new Uint8Array(file.data.data)], { type: file.type });
+    const blob = new Blob([new Uint8Array(file.data.data)], {
+      type: file.type,
+    });
     return URL.createObjectURL(blob);
   };
 

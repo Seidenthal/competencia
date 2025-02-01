@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Calendar from './Calendar';
+import { format, isBefore, startOfDay } from 'date-fns';
 
 const HomePage = () => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -18,10 +19,30 @@ const HomePage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const eventos = [
-    { date: '2025-02-15', time: '10:00', topic: 'Workshop de Programação' },
-    { date: '2025-02-20', time: '14:00', topic: 'Mentoria Técnica' },
-  ];
+  const [encontros, setEncontros] = useState([]);
+
+  const alunaId = localStorage.getItem('alunaId');
+
+  // useEffect para buscar os encontros da aluna ao carregar a página
+  useEffect(() => {
+    const fetchEncontros = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:5000/api/encontros/aluna/${alunaId}`,
+        );
+        const data = await res.json();
+        setEncontros(data);
+      } catch (err) {
+        console.error('Erro ao buscar encontros:', err);
+      }
+    };
+    fetchEncontros();
+  }, [alunaId]);
+
+  // Filtra apenas os encontros futuros para exibição na lista
+  const encontrosFuturos = encontros.filter(
+    (encontro) => isBefore(new Date(), startOfDay(new Date(encontro.date))), // Apenas os encontros a partir de hoje
+  );
 
   return (
     <div className="flex flex-col items-center bg-pink-300 min-h-screen">
@@ -47,20 +68,12 @@ const HomePage = () => {
                 Sobre Nós
               </Link>
             </li>
-            <li>
-              <Link
-                to="/minhaConta"
-                classname="text-lg text-white p-2 hover:bg-customOrange transition duration-300"
-              >
-                Minha Conta
-              </Link>
-            </li>
           </ul>
         </nav>
       </header>
 
       {/* Banner de imagens */}
-      <div className="w-9/12 mt-6">
+      <div className="w-6/12 mt-6 p-4 rounded-xl max-w-screen-sm">
         <img
           src={images[currentImage]}
           alt="Banner"
@@ -68,9 +81,26 @@ const HomePage = () => {
         />
       </div>
 
-      {/* Calendário*/}
-      <div className="w-[940px] bg-white p2 rounded shadow-md mt-6">
-        <Calendar events={eventos} />
+      <div className="space-y-6">
+        {/* Calendário */}
+        <Calendar events={encontros} />
+
+        {/* Lista de encontros futuros */}
+        <div className="bg-white p-4 rounded shadow-md">
+          <h2 className="text-lg font-bold">Próximos Encontros</h2>
+          {encontrosFuturos.length > 0 ? (
+            <ul className="list-disc pl-5">
+              {encontrosFuturos.map((encontro, index) => (
+                <li key={index}>
+                  {format(new Date(encontro.date), 'dd/MM/yyyy')} às{' '}
+                  {encontro.time} - {encontro.topic}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-500">Nenhum encontro futuro agendado.</p>
+          )}
+        </div>
       </div>
 
       {/* Botões */}

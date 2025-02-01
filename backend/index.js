@@ -5,6 +5,8 @@ const db = require('./config/database');
 const Tutora = require('./models/Tutora');
 const Aluna = require('./models/Aluna');
 const Admin = require('./models/Admin');
+const Section = require('./models/Section');
+const Encontros = require('./models/Encontros');
 
 const app = express();
 app.use(cors());
@@ -12,7 +14,7 @@ app.use(bodyParser.json());
 
 db.authenticate()
   .then(() => console.log('Database connected...'))
-  .catch(err => console.log('Error: ' + err));
+  .catch((err) => console.log('Error: ' + err));
 
 db.sync()
   .then(async () => {
@@ -24,12 +26,13 @@ db.sync()
       console.log('Admin padrão criado: admin@admin.com / admin123');
     }
   })
-  .catch(err => console.log('Error: ' + err));
+  .catch((err) => console.log('Error: ' + err));
 
 app.use('/api/tutoras', require('./routes/tutoras'));
 app.use('/api/alunas', require('./routes/alunas'));
 app.use('/api/admins', require('./routes/admins'));
-app.use('/api/sections', require('./routes/sections')); // Adicionando a rota sections
+app.use('/api/sections', require('./routes/sections'));
+app.use('/api/encontros', require('./routes/encontros'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));

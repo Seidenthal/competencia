@@ -4,44 +4,44 @@ const db = require('../config/database');
 const Aluna = db.define('Aluna', {
   nome: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   telefone: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   cpf: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   ra: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   curso: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
   },
   senha: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   aprovado: {
     type: DataTypes.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   tutoraId: {
     type: DataTypes.INTEGER,
     allowNull: true,
     references: {
       model: 'Tutoras',
-      key: 'id'
-    }
-  }
+      key: 'id',
+    },
+  },
 });
 module.exports = Aluna;

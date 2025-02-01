@@ -22,7 +22,6 @@ const Section = db.define('Section', {
   tutoraId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    primaryKey: true,
     references: {
       model: 'Tutoras',
       key: 'id', //
@@ -30,6 +29,7 @@ const Section = db.define('Section', {
   },
   index: {
     type: DataTypes.INTEGER,
+    primaryKey: true,
     allowNull: false,
     autoIncrement: true,
   },

@@ -6,7 +6,16 @@ const Aluna = require('../models/Aluna');
 router.post('/register', async (req, res) => {
   const { nome, telefone, cpf, ra, curso, email, senha } = req.body;
   try {
-    const aluna = await Aluna.create({ nome, telefone, cpf, ra, curso, email, senha, tutoraId: null });
+    const aluna = await Aluna.create({
+      nome,
+      telefone,
+      cpf,
+      ra,
+      curso,
+      email,
+      senha,
+      tutoraId: null,
+    });
     res.json(aluna);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -17,9 +26,11 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   const { email, senha } = req.body;
   try {
-    const aluna = await Aluna.findOne({ where: { email, senha, aprovado: true } });
+    const aluna = await Aluna.findOne({
+      where: { email, senha, aprovado: true },
+    });
     if (aluna) {
-      res.json({ message: 'Login successful', aluna });
+      res.json({ id: aluna.id });
     } else {
       res.status(401).json({ message: 'Invalid credentials or not approved' });
     }

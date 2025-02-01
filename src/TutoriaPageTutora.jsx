@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'; // Importa os hooks do React
 import Section from './Section'; // Importa o componente Section
+import { Link } from 'react-router-dom'; // Importa o componente Link
 
 function TutoriaPageTutora() {
   // Estado para armazenar as seções da tutora
@@ -128,12 +129,32 @@ function TutoriaPageTutora() {
   };
 
   return (
-    <div className="bg-pink-100 min-h-screen p-8">
+    <div className="bg-pink-100 min-h-screen p-8 space-y-8">
       {/* Cabeçalho */}
-      <header className="p-4 bg-customPurple text-white mb-6">
-        <h1 className="text-2xl font-bold text-center">
-          Gerenciamento de Seções
-        </h1>
+      <header className="flex justify-between items-center w-full p-4 bg-customPurple rounded-xl">
+        <div className="ml-10">
+          <img src="/imagens/logo.png" alt="Logo" className="h-36" />
+        </div>
+        <nav className="mr-10">
+          <ul className="flex space-x-6">
+            <li>
+              <Link
+                to="/"
+                className="text-lg text-white p-2 hover:bg-customOrange transition duration-300"
+              >
+                Página Inicial
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/encontrosTutora"
+                className="text-lg text-white p-2 hover:bg-customOrange transition duration-300"
+              >
+                Encontros
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </header>
 
       {/* Lista de seções */}
